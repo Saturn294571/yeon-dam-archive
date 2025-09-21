@@ -1,14 +1,14 @@
-# frozen_string_literal: true
-
 source "https://rubygems.org"
 
-gemspec
+# Jekyll 및 기본 플러그인
+gem "jekyll"
+gem "jekyll-feed"
+gem "jekyll-seo-tag"
 
-gem "html-proofer", "~> 5.0", group: :test
+# Chirpy 테마 플러그인
+# 저장소의 _config.yml 파일에 명시된 테마를 설치합니다.
+gem "jekyll-theme-chirpy"
 
-platforms :mingw, :x64_mingw, :mswin, :jruby do
-  gem "tzinfo", ">= 1", "< 3"
-  gem "tzinfo-data"
-end
-
-gem "wdm", "~> 0.2.0", :platforms => [:mingw, :x64_mingw, :mswin]
+# 기타 Chirpy 테마가 사용하는 플러그인
+gem "jekyll-archives"
+gem "jekyll-paginate"
