@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Add this line
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:

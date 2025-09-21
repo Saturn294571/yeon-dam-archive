@@ -12,3 +12,5 @@ gem "jekyll-theme-chirpy"
 # 기타 Chirpy 테마가 사용하는 플러그인
 gem "jekyll-archives"
 gem "jekyll-paginate"
+
+gem 'git'
