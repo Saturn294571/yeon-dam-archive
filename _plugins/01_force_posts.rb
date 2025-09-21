@@ -1,19 +1,22 @@
 # _plugins/01_force_posts.rb
 
-Jekyll::Hooks.register :site, :post_read do |site| # ":after_read"를 ":post_read"로 수정
-  # 'contents' 폴더에 있는 모든 정적 파일(StaticFile)을 찾습니다.
+Jekyll::Hooks.register :site, :post_read do |site|
   site.static_files.each do |file|
     if file.relative_path.start_with?('/contents/') && file.extname == '.md'
-      # 이 파일들을 Jekyll의 'posts' 컬렉션으로 옮깁니다.
       new_post = Jekyll::Document.new(
         file.path, { site: site, collection: site.collections['posts'] }
       )
       new_post.read
+
+      # --- 해결책 1: math 속성 자동 추가 ---
+      # 해당 노트의 머리말에 math 속성이 별도로 명시되어 있지 않으면 true로 설정
+      new_post.data['math'] = true unless new_post.data.key?('math')
+      # ------------------------------------
+      
       site.collections['posts'].docs << new_post
     end
   end
 
-  # 이미 posts 컬렉션으로 옮겨진 파일들을 static_files 목록에서 제거하여 중복 처리를 방지합니다.
   site.static_files.delete_if do |file|
     file.relative_path.start_with?('/contents/') && file.extname == '.md'
   end
